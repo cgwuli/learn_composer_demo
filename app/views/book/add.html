@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新增图书</title>
+  </head>
+  <body>
+    <a href="/">管理界面</a> || <a href="/booklist/toadd">添加图书</a> <br />
+    <hr />
+    <form action="/booklist/doadd" method="post" enctype="multipart/form-data">
+      图书分类:
+      <select name="cid" id="">
+        
+        {% for item in catelist %}
+
+        <option value="{{item.id}}">
+          {% for i in 0..item.level %} - {% endfor %}
+          {{item.catename}}
+        </option>
+
+        {% endfor %}
+      </select>
+      <br>
+      图书名称:<input type="text" name="name" value="" /><br />
+      图书介绍:<input type="text" name="des" value="" /><br />
+      图书价格:<input type="text" name="price" value="" /><br />
+      图书库存:<input type="text" name="stock" value="" /><br />
+      图书封面:<input type="file" name="filename" value="" /><br />
+     
+     
+      <input type="submit" name="submit" value="添加图书" />
+    </form>
+  </body>
+</html>

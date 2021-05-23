@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>更新图书</title>
+  </head>
+  <body>
+    <a href="/">管理界面</a> || <a href="/booklist/toadd">添加图书</a> <br />
+    <hr />
+    <form action="/booklist/doupdate" method="post">
+      上级图书:
+      <select name="cid" id="">
+        <option value="0" {{cur.cid ==0 ? 'selected':''}}>---根图书---</option>
+        {% for item in booklist %}
+
+        <option value="{{item.id}}" {{cur.cid ==item.id ? 'selected':''}}>
+          {% for i in 0..item.level %} - {% endfor %}
+          {{item.bookname}}
+        </option>
+
+        {% endfor %}
+      </select>
+      <br>
+      <input type="text" name="id" value="{{cur.id}}" style="display: none;"/>
+      图书名称:<input type="text" name="bookname" value="{{cur.bookname}}" /><br />
+      排列顺序:<input type="text" size="2" name="oid" value="{{cur.oid}}" /><br />
+      <input type="submit" name="submit" value="更新图书" />
+    </form>
+  </body>
+</html>

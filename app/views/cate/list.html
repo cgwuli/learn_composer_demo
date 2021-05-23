@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分类列表</title>
+  </head>
+  <body>
+    <a href="/">管理界面</a> || <a href="/catelist/toadd">添加分类</a> <br />
+    <hr />
+    <form action="/catelist" method="post">
+      <table width="700" border="0">
+        <h1>分类列表</h1>
+        <tr>
+          <td>排序</td>
+          <td>列表</td>
+          <td>操作</td>
+        </tr>
+
+        {% for item in catelist %}
+        <tr>
+          <td>
+            <input
+              type="text"
+              size="2"
+              name="id[{{item.id}}]"
+              value="{{item.oid}}"
+              id=""
+            />
+          </td>
+          <td>{% for i in 0..item.level %} - {% endfor %} {{item.catename}}</td>
+          <td>
+            <a href="/catelist/toupdate?id={{item.id}}">修改</a>/ {% if
+            item.childs == '' %}
+            <a
+              href="/catelist/dodelete?id={{item.id}}"
+              onclick="return confirm('是否删除分类【{{item.catename}}】')"
+              >删除</a
+            >
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="3">
+            <input type="submit" value="提交" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

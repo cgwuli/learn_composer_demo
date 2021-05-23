@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新增分类</title>
+  </head>
+  <body>
+    <a href="/">管理界面</a> || <a href="/catelist/toadd">添加分类</a> <br />
+    <hr />
+    <form action="/catelist/doadd" method="post">
+      上级分类:
+      <select name="pid" id="">
+        <option value="0" selected>---根分类---</option>
+        {% for item in catelist %}
+
+        <option value="{{item.id}}">
+          {% for i in 0..item.level %} - {% endfor %}
+          {{item.catename}}
+        </option>
+
+        {% endfor %}
+      </select>
+      <br>
+      分类名称:<input type="text" name="catename" value="" /><br />
+      排列顺序:<input type="text" size="2" name="oid" value="" /><br />
+      <input type="submit" name="submit" value="添加分类" />
+    </form>
+  </body>
+</html>
